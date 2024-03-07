@@ -53,8 +53,6 @@ class Platform {
         this.image = image
         this.width = image.width
         this.height = image.height
-
-        
     }
 
     draw() {
@@ -65,6 +63,23 @@ class Platform {
 }
 
 // Background
+class WindMill {
+    constructor({ x, y, wind }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = wind
+        this.width = wind.width
+        this.height = wind.height
+
+        
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
 class GenericObject {
     constructor({ x, y, background }) {
         this.position = {
@@ -83,33 +98,63 @@ class GenericObject {
     }
 }
 
+//Image adding
 const image = new Image()
 image.src = './image/platform.png'
 const background = new Image()
 background.src ='./image/background.png'
+const tree = new Image()
+tree.src= './image/tree.png'
+const wind = new Image()
+wind.src= './image/wind.png'
 
-console.log(background)
-
+// Bottom platform across map
 const player = new Player()
 const platforms = [new Platform({ 
-    x: 700, 
-    y: 470, 
+    x: 500, 
+    y: 510, 
     image }), 
     new Platform({ 
     x: 0, 
-    y: 470, 
+    y: 510, 
+    image }),
+    new Platform({ 
+    x: -260, 
+    y: 510, 
+    image }),
+    new Platform({ 
+    x: 760, 
+    y: 510, 
+    image }), 
+    new Platform({ 
+    x: 1020, 
+    y: 510, 
     image })
+]
+
+const windMill = [
+    new WindMill({
+    x: -10,
+    y: 50,
+    wind
+    }),
 ]
 
 const genericObjects = [
     new GenericObject({
-        x: 0,
-        y: 0,
-        background
-    })
+    x: 0,
+    y: 0,
+    background
+    }),
+    new GenericObject({
+    x: 1023,
+    y: 0,
+    background
+    }),
 ]
 
-console.log(GenericObject)
+
+console.log(wind)
 
 
 const keys = {
@@ -152,11 +197,17 @@ function animate() {
             platforms.forEach((platform) => {
                 platform.position.x -= 5
             })
+            genericObjects.forEach(genericObjects => {
+                genericObjects.position.x -= 3
+            })
         }
         else if (keys.left.pressed) {
             scrollOffset -= 5
             platforms.forEach((platform) => {
                 platform.position.x += 5
+            })
+            genericObjects.forEach(genericObjects => {
+                genericObjects.position.x += 3
             })
         }
     }
