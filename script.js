@@ -1,16 +1,14 @@
-import platform from './image/platform.png'
-
 const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d');
 
 //const jump = document.getElementById('jump');
 
-canvas.width = window.innerWidth
+canvas.width = 1024
 
-canvas.height = window.innerHeight
+canvas.height = 576
 
-console.log(canvas);
+//console.log(canvas);
 
 const gravity = 1.5
 
@@ -47,24 +45,72 @@ class Player {
 
 // Platform
 class Platform {
-    constructor({ x, y }) {
+    constructor({ x, y, image }) {
         this.position = {
             x,
             y
         }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
 
-        this.width = 200
-        this.height = 20
+        
     }
 
     draw() {
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.image, this.position.x, this.position.y)
+        // c.fillStyle = 'blue'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
 
+// Background
+class GenericObject {
+    constructor({ x, y, background }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = background
+        this.width = background.width
+        this.height = background.height
+
+        
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+const image = new Image()
+image.src = './image/platform.png'
+const background = new Image()
+background.src ='./image/background.png'
+
+console.log(background)
+
 const player = new Player()
-const platforms = [new Platform({ x: 800, y: 900}), new Platform({ x: 600, y: 700})]
+const platforms = [new Platform({ 
+    x: 700, 
+    y: 470, 
+    image }), 
+    new Platform({ 
+    x: 0, 
+    y: 470, 
+    image })
+]
+
+const genericObjects = [
+    new GenericObject({
+        x: 0,
+        y: 0,
+        background
+    })
+]
+
+console.log(GenericObject)
+
 
 const keys = {
     right: {
@@ -79,15 +125,21 @@ let scrollOffset = 0
 
 function animate() {
     requestAnimationFrame(animate)
-    c.clearRect(0, 0, canvas.width, canvas.height)
-    player.update()
+    c.fillStyle = 'white'
+    c.fillRect(0, 0, canvas.width, canvas.height)
+
+    genericObjects.forEach(genericObjects =>{
+        genericObjects.draw()
+    })
+
     platforms.forEach((platform) => {
         platform.draw() 
     })
-   
+    
+    player.update()
 
     // Player movement & side scroll 
-    if (keys.right.pressed && player.position.x < 800) {
+    if (keys.right.pressed && player.position.x < 500) {
         player.velocity.x = 5
     }
     else if (keys.left.pressed && player.position.x > 300) {
