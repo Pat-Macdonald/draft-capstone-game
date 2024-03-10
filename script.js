@@ -2,13 +2,9 @@ const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d');
 
-//const jump = document.getElementById('jump');
-
 canvas.width = 1024
 
 canvas.height = 576
-
-//console.log(canvas);
 
 const gravity = 1.5
 
@@ -23,13 +19,16 @@ class Player {
             x: 0,
             y: 0
         }
-        this.width = 30
-        this.height = 30
+        this.image = catSitRight
+        this.width = 50
+        this.height = 50
     }
 
     draw() {
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        //test
+        c.drawImage(this.image, this.position.x, this.position.y)
+        // c.fillStyle = 'red'
+        // c.fillRect(this.position.x,this.position.y,this.width,this.height)
     }
 
     update() {
@@ -92,6 +91,38 @@ class SmallPlatform {
     }
 }
 
+class Coin {
+    constructor({ x, y, coin }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = coin
+        this.width = coin.width
+        this.height = coin.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
+class CatNip {
+    constructor({ x, y, catNip }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = catNip
+        this.width = catNip.width
+        this.height = catNip.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
 // Background
 class WindMill {
     constructor({ x, y, wind }) {
@@ -102,8 +133,6 @@ class WindMill {
         this.image = wind
         this.width = wind.width
         this.height = wind.height
-
-        
     }
 
     draw() {
@@ -120,8 +149,6 @@ class Tree {
         this.image = tree
         this.width = tree.width
         this.height = tree.height
-
-        
     }
 
     draw() {
@@ -138,8 +165,6 @@ class GenericObject {
         this.image = background
         this.width = background.width
         this.height = background.height
-
-        
     }
 
     draw() {
@@ -147,7 +172,17 @@ class GenericObject {
     }
 }
 
+
+
 //Image adding
+const catSitRight = new Image()
+catSitRight.src = './image/cat-sit-right.png'
+const catSitLeft = new Image()
+catSitLeft.src = './image/cat-sit-left.png'
+const coin = new Image()
+coin.src = './image/coin.png'
+const catNip = new Image()
+catNip.src = './image/cat-nip.png'
 const platform = new Image()
 platform.src = './image/platform.png'
 const mediumPlatform = new Image()
@@ -161,9 +196,20 @@ wind.src = './image/wind.png'
 const background = new Image()
 background.src ='./image/background.png'
 
-
-// Bottom platform across map
+// cat nip & coin
 const player = new Player()
+
+const catNips = [new CatNip({
+    x: 400,
+    y:450,
+    catNip}),
+]
+
+const coins = [new Coin({
+    x: 500,
+    y:450,
+    coin}),
+]
 
 // Base platform placement
 const platforms = [new Platform({ 
@@ -187,19 +233,19 @@ const platforms = [new Platform({
     y: 510, 
     platform }),
     new Platform({ 
-    x: 1700, 
+    x: 1500, 
     y: 510, 
     platform }),
     new Platform({ 
-    x: 1960, 
+    x: 1760, 
     y: 510, 
     platform }),
     new Platform({ 
-    x: 2220, 
+    x: 2020, 
     y: 510, 
     platform }),
     new Platform({ 
-    x: 2480, 
+    x: 2280, 
     y: 510, 
     platform }),
     new Platform({ 
@@ -208,6 +254,46 @@ const platforms = [new Platform({
     platform }),
     new Platform({ 
     x: 4010, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 4600, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 4860, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 5120, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 5380, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 5900, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 6800, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 7060, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 7320, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 7580, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 8150,
     y: 510, 
     platform }),
 ]
@@ -222,19 +308,119 @@ const mediumPlatforms = [new MediumPlatform({
     y: 440, 
     mediumPlatform }),
     new MediumPlatform({ 
+    x: 1800, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 1940, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 2080, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 2220, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 2850, 
+    y: 510, 
+    mediumPlatform }),
+    new MediumPlatform({ 
     x: 3200, 
     y: 510, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 3860, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 4000, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 4140, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 4700, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 4840, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 5360, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 5500, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 6500, 
+    y: 510, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7000, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7140, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7280, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7420, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7560, 
+    y: 440, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7200, 
+    y: 370, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7340, 
+    y: 370, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7480, 
+    y: 370, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7300, 
+    y: 300, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7440, 
+    y: 300, 
+    mediumPlatform }),
+    new MediumPlatform({ 
+    x: 7380, 
+    y: 230, 
     mediumPlatform }),
 ]
 
 //small platform placements
 const smallPlatforms = [new SmallPlatform({ 
     x: 1300, 
-    y: 380, 
+    y: 370, 
     smallPlatform }),
     new SmallPlatform({ 
     x: 3500, 
     y: 510, 
+    smallPlatform }),
+    new SmallPlatform({ 
+    x: 3900, 
+    y: 370, 
     smallPlatform }),
 ]
 
@@ -247,7 +433,7 @@ const trees = [
     }),
     new Tree({
     x: 2150,
-    y: 410,
+    y: 340,
     tree
     }),
     new Tree({
@@ -255,15 +441,35 @@ const trees = [
     y: 410,
     tree
     }),
+    new Tree({
+    x: 4100,
+    y: 340,
+    tree
+    }),
+    new Tree({
+    x: 4760,
+    y: 340,
+    tree
+    }),
+    new Tree({
+    x: 5420,
+    y: 340,
+    tree
+    }),
+    new Tree({
+    x: 7000,
+    y: 340,
+    tree
+    }),
+    new Tree({
+    x: 7800,
+    y: 410,
+    tree
+    }),
 ]
 
 // wind mill placements
 const windMills = [
-    new WindMill({
-    x: -144,
-    y: 70,
-    wind
-    }),
     new WindMill({
     x: 880,
     y: 70,
@@ -279,15 +485,20 @@ const windMills = [
     y: 70,
     wind
     }),
+    new WindMill({
+    x: 3949,
+    y: 70,
+    wind
+    }),
+    new WindMill({
+    x: 4972,
+    y: 70,
+    wind
+    }),
 ]
 
 //background placments
 const genericObjects = [
-        new GenericObject({
-    x: -1023,
-    y: 0,
-    background
-    }),
     new GenericObject({
     x: 0,
     y: 0,
@@ -308,10 +519,17 @@ const genericObjects = [
     y: 0,
     background
     }),
+    new GenericObject({
+    x: 4092,
+    y: 0,
+    background
+    }),
+    new GenericObject({
+    x: 5115,
+    y: 0,
+    background
+    }),
 ]
-
-
-
 
 // Keys & movement
 const keys = {
@@ -354,13 +572,21 @@ function animate() {
         platform.draw() 
     })
     
+    coins.forEach((coin) => {
+        coin.draw() 
+    })
+
+    catNips.forEach((catNip) => {
+        catNip.draw() 
+    })
+
     player.update()
 
     // Player movement & side scroll 
     if (keys.right.pressed && player.position.x < 500) {
         player.velocity.x = 5
     }
-    else if (keys.left.pressed && player.position.x > 300) {
+    else if ((keys.left.pressed && player.position.x > 300) || (keys.left.pressed && scrollOffset === -0 && player.position.x > 0)) {
         player.velocity.x = -5
     } 
     else {
@@ -385,8 +611,14 @@ function animate() {
             windMills.forEach(windMills => {
                 windMills.position.x -= 3
             })
+            coins.forEach(coins => {
+                coins.position.x -= 5
+            })
+            catNips.forEach(catNips => {
+                catNips.position.x -= 5
+            })
         }
-        else if (keys.left.pressed) {
+        else if (keys.left.pressed && scrollOffset > 0) {
             scrollOffset -= 5
             platforms.forEach((platform) => {
                 platform.position.x += 5
@@ -406,8 +638,24 @@ function animate() {
             windMills.forEach(windMills => {
                 windMills.position.x += 3
             })
+            coins.forEach(coins => {
+                coins.position.x += 5
+            })
+            catNips.forEach(catNips => {
+                catNips.position.x += 5
+            })
         }
     }
+
+    coins.forEach((coin) => {
+        if ( 
+            player.position.y + player.height <= coin.position.y && player.position.y + player.height + player.velocity.y >= coin.position.y && player.position.x + player.width >= coin.position.x && player.position.x <= coin.position.x + coin.width
+            ) {
+            coin.position.y = 20
+            coin.position.x = 400
+            coin.velocity.x = 5
+        }
+    })
 
     // Platform collison detection
     platforms.forEach((platform) => {
@@ -434,8 +682,14 @@ function animate() {
         }
     })
 
+    // Win condition
     if (scrollOffset > 10000) {
         console.log('You Win')
+    }
+
+    // Lose condition
+    if (player.position.y > canvas.height) {
+        console.log('You Lose')
     }
 }
 
@@ -454,7 +708,7 @@ window.addEventListener('keydown', ({keyCode}) => {
         case 87:
             console.log('up')
             document.getElementById('jump').play()
-            player.velocity.y -= 20
+            player.velocity.y -= 10
             break
         case 83:
             console.log('down')
@@ -481,6 +735,3 @@ window.addEventListener('keyup', ({keyCode}) => {
             break
     }
 })
-
-
-

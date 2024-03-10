@@ -3,14 +3,39 @@
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
     background-color: black;
 }
 
-canvas {
-    border:2rem red solid;
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    background-image: url(./image/diagonal-paw.png);
 }
 
+header {
+    text-align: center;
+    color: bisque;
+}
+
+h1 {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: bisque;
+    padding-top: 1rem;
+}
+
+canvas {
+    border-radius: 2rem;
+    border: #FFD1DC 1rem solid;
+}
+
+footer {
+    text-align: center;
+    font-family: "Silkscreen", sans-serif;
+    color: bisque;
+    padding-bottom: 1rem;
+}
