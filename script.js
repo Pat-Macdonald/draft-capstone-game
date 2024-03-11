@@ -8,6 +8,8 @@ canvas.height = 576
 
 const gravity = 1.5
 
+const coinSound = document.getElementById("coin-sound")
+
 // Player
 class Player {
     constructor() {
@@ -27,8 +29,6 @@ class Player {
     draw() {
         //test
         c.drawImage(this.image, this.position.x, this.position.y)
-        // c.fillStyle = 'red'
-        // c.fillRect(this.position.x,this.position.y,this.width,this.height)
     }
 
     update() {
@@ -200,14 +200,134 @@ background.src ='./image/background.png'
 const player = new Player()
 
 const catNips = [new CatNip({
-    x: 400,
-    y:450,
+    x: 7440,
+    y:170,
     catNip}),
 ]
 
 const coins = [new Coin({
-    x: 500,
-    y:450,
+    x: 800,
+    y:470,
+    coin}),
+    new Coin({
+    x: 850,
+    y:470,
+    coin}),
+    new Coin({
+    x: 900,
+    y:470,
+    coin}),
+    new Coin({
+    x: 950,
+    y:470,
+    coin}),
+    new Coin({
+    x: 1160,
+    y:400,
+    coin}),
+    new Coin({
+    x: 1210,
+    y:400,
+    coin}),
+    new Coin({
+    x: 1330,
+    y:330,
+    coin}),
+    new Coin({
+    x: 1900,
+    y:400,
+    coin}),
+    new Coin({
+    x: 1950,
+    y:400,
+    coin}),
+    new Coin({
+    x: 2000,
+    y:400,
+    coin}),
+    new Coin({
+    x: 2050,
+    y:400,
+    coin}),
+    new Coin({
+    x: 2870,
+    y:470,
+    coin}),
+    new Coin({
+    x: 2920,
+    y:470,
+    coin}),
+    new Coin({
+    x: 2970,
+    y:470,
+    coin}),
+    new Coin({
+    x: 3210,
+    y:470,
+    coin}),
+    new Coin({
+    x: 3260,
+    y:470,
+    coin}),
+    new Coin({
+    x: 3310,
+    y:470,
+    coin}),
+    new Coin({
+    x: 3920,
+    y:330,
+    coin}),
+    new Coin({
+    x: 4100,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4150,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4200,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4740,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4790,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4840,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4890,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 4940,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 5400,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 5450,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 5500,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 5550,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 5600,
+    y: 400,
     coin}),
 ]
 
@@ -531,7 +651,7 @@ const genericObjects = [
     }),
 ]
 
-// Keys & movement
+
 const keys = {
     right: {
         pressed: false
@@ -646,14 +766,34 @@ function animate() {
             })
         }
     }
-
+    // Coin vanishing
     coins.forEach((coin) => {
         if ( 
+            player.position.x + player.height <= coin.position.x && player.position.x + player.height + player.velocity.x >= coin.position.x && player.position.y + player.width >= coin.position.y && player.position.y <= coin.position.y + coin.width
+            ) {
+            coin.position.y = -50
+        }
+        else if ( 
             player.position.y + player.height <= coin.position.y && player.position.y + player.height + player.velocity.y >= coin.position.y && player.position.x + player.width >= coin.position.x && player.position.x <= coin.position.x + coin.width
             ) {
-            coin.position.y = 20
-            coin.position.x = 400
-            coin.velocity.x = 5
+            coin.position.y = -50
+        }
+    })
+
+
+
+    //Cat Nip Vanishing and Power Up
+    catNips.forEach((catNip) => {
+        if ( 
+            player.position.x + player.height <= catNip.position.x && player.position.x + player.height + player.velocity.x >= catNip.position.x && player.position.y + player.width >= catNip.position.y && player.position.y <= catNip.position.y + catNip.width
+            ) {
+                catNip.position.y = -50
+            }
+
+        else if ( 
+            player.position.y + player.height <= catNip.position.y && player.position.y + player.height + player.velocity.y >= catNip.position.y && player.position.x + player.width >= catNip.position.x && player.position.x <= catNip.position.x + catNip.width
+            ) {
+            catNip.position.y = -50
         }
     })
 
@@ -695,6 +835,8 @@ function animate() {
 
 animate()
 
+
+// keys & movements
 window.addEventListener('keydown', ({keyCode}) => {
     switch (keyCode) {
         case 65:
