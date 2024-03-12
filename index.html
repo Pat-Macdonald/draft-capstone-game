@@ -9,23 +9,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-<body>
-    <header>
+<nav>
+    <section id="logo">
+        <img id="cat-logo" src="./image/cat-box-right.png">
         <h1>Purr Pixel</h1>
-    </header>
+    </section>
+    <section id="game-info">
+        <img id="coin-logo" src="./image/coin.png">
+        <p>X<span id="coin-count"></span></p>
+        <p>X<span id="life-count"></span></p>
+    </section>
+    <a href="./pages/source.html" >Source</a>
+</nav>
+<body>
     <main>
-    <audio id="background-music" conrols autoplay loop src="./audio/music.mp3"></audio>
+    
     <audio id="jump">
         <source src="./audio/jump.mp3">
     </audio>
     <audio>
         <source id="coin-sound" src="./audio/coin-sound.mp3">
     </audio>
-    <canvas></canvas>
+    <canvas>
+<audio id="background-music" src="./audio/music.mp3" controls autoplay loop></audio>
+    </canvas>
+
     </main>
     <footer>
         <p>Website coded by Patricia Macdonald</p>
     </footer>
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="./script.js">
+    </script>
 </body>
 </html>

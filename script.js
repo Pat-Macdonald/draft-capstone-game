@@ -8,7 +8,33 @@ canvas.height = 576
 
 const gravity = 1.5
 
-const coinSound = document.getElementById("coin-sound")
+let count = 0
+
+let lifeCounts = 9
+
+const coinSound = document.getElementById('coin-sound')
+
+const coinCount = document.getElementById('coin-count')
+
+const lifeCount = document.getElementById('life-count')
+
+function coinCounter() {
+    count++
+    coinCount.innerText = count
+}
+
+function lifeCounter() {
+    lifeCounts--
+    lifeCount.innerText = lifeCounts
+}
+
+console.log(lifeCounts)
+
+if (coinCount >= 1) {
+    coinSound.play()
+}
+
+const backgroundMusic = document.getElementById('background-music')
 
 // Player
 class Player {
@@ -197,7 +223,9 @@ const background = new Image()
 background.src ='./image/background.png'
 
 // cat nip & coin
-const player = new Player()
+const player = new Player() 
+
+const playerSpeed = player.velocity.x = 5
 
 const catNips = [new CatNip({
     x: 7440,
@@ -329,8 +357,49 @@ const coins = [new Coin({
     x: 5600,
     y: 400,
     coin}),
+    new Coin({
+    x: 6540,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 6590,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 6850,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 6900,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 7050,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 7100,
+    y: 400,
+    coin}),
+    new Coin({
+    x: 7210,
+    y: 330,
+    coin}),
+    new Coin({
+    x: 7260,
+    y: 330,
+    coin}),
+    new Coin({
+    x: 7300,
+    y: 260,
+    coin}),
+    new Coin({
+    x: 7350,
+    y: 260,
+    coin}),
 ]
 
+console.log(coins[0])
 // Base platform placement
 const platforms = [new Platform({ 
     x: -260, 
@@ -704,65 +773,65 @@ function animate() {
 
     // Player movement & side scroll 
     if (keys.right.pressed && player.position.x < 500) {
-        player.velocity.x = 5
+        player.velocity.x = playerSpeed
     }
     else if ((keys.left.pressed && player.position.x > 300) || (keys.left.pressed && scrollOffset === -0 && player.position.x > 0)) {
-        player.velocity.x = -5
+        player.velocity.x = -playerSpeed
     } 
     else {
         player.velocity.x = 0
         if (keys.right.pressed) {
             scrollOffset += 5
             platforms.forEach((platform) => {
-                platform.position.x -= 5
+                platform.position.x -= playerSpeed
             })
             mediumPlatforms.forEach((mediumPlatform) => {
-                mediumPlatform.position.x -= 5
+                mediumPlatform.position.x -= playerSpeed
             })
             smallPlatforms.forEach((smallPlatform) => {
-                smallPlatform.position.x -= 5
+                smallPlatform.position.x -= playerSpeed
             })
             trees.forEach((trees) => {
-                trees.position.x -= 5
+                trees.position.x -= playerSpeed
             })
             genericObjects.forEach(genericObjects => {
-                genericObjects.position.x -= 3
+                genericObjects.position.x -= playerSpeed * .66
             })
             windMills.forEach(windMills => {
-                windMills.position.x -= 3
+                windMills.position.x -= playerSpeed * .66
             })
             coins.forEach(coins => {
-                coins.position.x -= 5
+                coins.position.x -= playerSpeed
             })
             catNips.forEach(catNips => {
-                catNips.position.x -= 5
+                catNips.position.x -= playerSpeed
             })
         }
         else if (keys.left.pressed && scrollOffset > 0) {
             scrollOffset -= 5
             platforms.forEach((platform) => {
-                platform.position.x += 5
+                platform.position.x += playerSpeed
             })
             mediumPlatforms.forEach((mediumPlatform) => {
-                mediumPlatform.position.x += 5
+                mediumPlatform.position.x += playerSpeed
             })
             smallPlatforms.forEach((smallPlatform) => {
-                smallPlatform.position.x += 5
+                smallPlatform.position.x += playerSpeed
             })
             trees.forEach((trees) => {
-                trees.position.x += 5
+                trees.position.x += playerSpeed
             })
             genericObjects.forEach(genericObjects => {
-                genericObjects.position.x += 3
+                genericObjects.position.x += playerSpeed * .66
             })
             windMills.forEach(windMills => {
-                windMills.position.x += 3
+                windMills.position.x += playerSpeed * .66
             })
             coins.forEach(coins => {
-                coins.position.x += 5
+                coins.position.x += playerSpeed
             })
             catNips.forEach(catNips => {
-                catNips.position.x += 5
+                catNips.position.x += playerSpeed
             })
         }
     }
@@ -772,11 +841,19 @@ function animate() {
             player.position.x + player.height <= coin.position.x && player.position.x + player.height + player.velocity.x >= coin.position.x && player.position.y + player.width >= coin.position.y && player.position.y <= coin.position.y + coin.width
             ) {
             coin.position.y = -50
+                if (coin.position.y === -50){
+                    console.log("yes")
+                    coinCounter()
+                }
         }
         else if ( 
             player.position.y + player.height <= coin.position.y && player.position.y + player.height + player.velocity.y >= coin.position.y && player.position.x + player.width >= coin.position.x && player.position.x <= coin.position.x + coin.width
             ) {
             coin.position.y = -50
+                if (coin.position.y === -50){
+                    console.log("yes")
+                    coinCounter()
+                }
         }
     })
 
@@ -831,6 +908,7 @@ function animate() {
     if (player.position.y > canvas.height) {
         console.log('You Lose')
     }
+
 }
 
 animate()

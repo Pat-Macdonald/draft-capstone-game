@@ -15,9 +15,49 @@ main {
     background-image: url(./image/diagonal-paw.png);
 }
 
-header {
+#logo {
+    display: flex;
+    align-items: center;
+}
+
+#cat-logo {
+    padding-left: 2rem;
+}
+
+#game-info {
+    display: flex;
+    align-items: center;
     text-align: center;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
     color: bisque;
+}
+
+#coin-logo {
+    padding-right: 0.5rem;
+}
+
+a {
+    text-decoration: none;
+    text-align: center;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: bisque;
+    padding-right: 2rem;
+}
+
+a:hover {
+    color:#FFD1DC;
+}
+
+nav {
+    display: flex;
+    justify-content:space-between;
+    text-align: flex-start;
+    color: bisque;
+    padding-top: 1rem;
 }
 
 h1 {
@@ -25,7 +65,15 @@ h1 {
     font-weight: 700;
     font-style: normal;
     color: bisque;
-    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+#coin-counter {
+    text-align: center;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: bisque;
 }
 
 canvas {
@@ -39,3 +87,4 @@ footer {
     color: bisque;
     padding-bottom: 1rem;
 }
+
