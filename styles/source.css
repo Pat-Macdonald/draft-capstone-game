@@ -12,7 +12,7 @@ main {
     align-items: center;
     justify-content: center;
     height: 90vh;
-    background-image: url(./image/diagonal-paw.png);
+    background-image: url(../image/diagonal-paw.png);
 }
 
 #logo {
@@ -22,25 +22,6 @@ main {
 
 #cat-logo {
     padding-left: 2rem;
-}
-
-#game-info {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-family: "Silkscreen", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 1.5rem;
-    color: bisque;
-}
-
-#game-info img {
-    padding-left: 1rem;
-}
-
-#coin-logo {
-    padding-right: 0.5rem;
 }
 
 a {
@@ -80,21 +61,26 @@ h2 {
     font-weight: 700;
     font-style: normal;
     color: bisque;
-    font-size: 1.5rem;
-    padding-left: 1rem;
+    font-size: 2rem;
+    padding: 1rem 0;
 }
 
-#coin-counter {
-    text-align: center;
-    font-family: "Silkscreen", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    color: bisque;
+ul {
+    list-style: none;
 }
+ li {
+    padding: 0.5rem 0;
+ }
 
-canvas {
+div {
+    background-color: black;
+    padding: 4rem;
     border-radius: 2rem;
     border: #FFD1DC 1rem solid;
+}
+
+iframe {
+    border-radius: 1rem;
 }
 
 footer {
@@ -103,4 +89,3 @@ footer {
     color: bisque;
     padding-bottom: 1rem;
 }
-

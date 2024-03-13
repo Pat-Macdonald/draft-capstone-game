@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <title>Purr Pixel</title>
 </head>
 <nav>
     <section id="logo">
@@ -15,9 +15,13 @@
         <h1>Purr Pixel</h1>
     </section>
     <section id="game-info">
+        <img src="./image/cat-life.png">
+        <p>X<span id="life-count"></span></p>
         <img id="coin-logo" src="./image/coin.png">
         <p>X<span id="coin-count"></span></p>
-        <p>X<span id="life-count"></span></p>
+        <img src="./image/cat-nip.png">
+        <p>X<span id="cat-nip-count" ></span></p>
+
     </section>
     <a href="./pages/source.html" >Source</a>
 </nav>
@@ -27,8 +31,8 @@
     <audio id="jump">
         <source src="./audio/jump.mp3">
     </audio>
-    <audio>
-        <source id="coin-sound" src="./audio/coin-sound.mp3">
+    <audio id="coin-sound">
+        <source src="./audio/coin-sound.mp3">
     </audio>
     <canvas>
 <audio id="background-music" src="./audio/music.mp3" controls autoplay loop></audio>
