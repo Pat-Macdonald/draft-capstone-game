@@ -6,7 +6,19 @@ canvas.width = 1024
 
 canvas.height = 576
 
+function win() {
+    c.font = "100px Silkscreen";
+    c.textAlign = "left"
+    c.fillStyle = "#d4af37"
+    c.fillText("YOU WIN!", 250, 100);
+}
 
+function lose() {
+    c.font = "100px Silkscreen";
+    c.textAlign = "left"
+    c.fillStyle = "red"
+    c.fillText("GAME OVER", 200, 400);
+}
 
 const gravity = 1.5
 
@@ -32,9 +44,17 @@ function coinCounter() {
 
 coinCount.innerText = count
 
+
 function lifeCounter() {
     lifeCounts--
+    lifeCount.innerText = lifeCounts
+    if (lifeCounts === 0) {
+        console.log('game over')
+        playerSpeed = 0
+    }
 }
+
+
 lifeCount.innerText = lifeCounts
 
 function catNipCounter() {
@@ -50,6 +70,21 @@ if (coinCount >= 1) {
 
 const backgroundMusic = document.getElementById('background-music')
 
+class Box {
+    constructor({ x, y, box }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = box
+        this.width = box.width
+        this.height = box.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
 // Player
 class Player {
     constructor() {
@@ -67,7 +102,6 @@ class Player {
     }
 
     draw() {
-        //test
         c.drawImage(this.image, this.position.x, this.position.y)
     }
 
@@ -78,7 +112,7 @@ class Player {
         
         if (this.position.y + this.height + this.velocity.y <= canvas.height)
             this.velocity.y += gravity
-        else this.velocity.y = 0
+        // else this.velocity.y = 0
     }
 }
 
@@ -212,6 +246,22 @@ class Tree {
     }
 }
 
+class TreePurple {
+    constructor({ x, y, treePurple }) {
+        this.position = {
+            x,
+            y
+        }
+        this.image = treePurple
+        this.width = treePurple.width
+        this.height = treePurple.height
+    }
+
+    draw() {
+        c.drawImage(this.image, this.position.x, this.position.y)
+    }
+}
+
 class GenericObject {
     constructor({ x, y, background }) {
         this.position = {
@@ -231,10 +281,16 @@ class GenericObject {
 
 
 //Image adding
+const catStandRight = new Image()
+catStandRight.src = './image/cat-stand-right.png'
+const catStandLeft = new Image()
+catStandLeft.src = './image/cat-stand-left.png'
 const catSitRight = new Image()
 catSitRight.src = './image/cat-sit-right.png'
 const catSitLeft = new Image()
 catSitLeft.src = './image/cat-sit-left.png'
+const catBox = new Image ()
+catBox.src = './image/cat-box-right.png'
 const coin = new Image()
 coin.src = './image/coin.png'
 const catNip = new Image()
@@ -249,15 +305,25 @@ const cloud = new Image()
 cloud.src = './image/cloud.png'
 const tree = new Image()
 tree.src = './image/tree.png'
+const treePurple = new Image()
+treePurple.src = './image/tree-purple.png'
 const wind = new Image()
 wind.src = './image/wind.png'
 const background = new Image()
 background.src ='./image/background.png'
+const box = new Image()
+box.src = './image/box.png'
 
+const boxs = [
+    new Box({
+    x: 13300,
+    y: 460,
+    box}),
+]
 
 const player = new Player() 
 
-let playerSpeed = player.velocity.x = 20
+let playerSpeed = player.velocity.x = 5
 
 function powerUp() {
     let newPlayerSpeed = playerSpeed * 2
@@ -270,6 +336,7 @@ function powerUp() {
                 player.velocity.y = -25
         }
     })
+    
     setTimeout(powerDown, 5000)
 }
 
@@ -288,10 +355,6 @@ function powerDown() {
 
 //catnip placement
 const catNips = [
-    new CatNip({
-    x: 200,
-    y: 400,
-    catNip}),
     new CatNip({
     x: 3905,
     y: 320,
@@ -330,6 +393,14 @@ const coins = [new Coin({
     new Coin({
     x: 1330,
     y:330,
+    coin}),
+    new Coin({
+    x: 1800,
+    y:400,
+    coin}),
+    new Coin({
+    x: 1850,
+    y:350,
     coin}),
     new Coin({
     x: 1900,
@@ -867,6 +938,247 @@ const coins = [new Coin({
     x: 10000,
     y: 150,
     coin}),
+    // final coins
+    new Coin({
+    x: 11700,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11700,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11700,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11700,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 11750,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11750,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11750,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11750,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 11800,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11800,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11800,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11800,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 11850,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11850,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11850,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11850,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 11900,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11900,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11900,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11900,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 11950,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 11950,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 11950,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 11950,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12000,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12000,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12000,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12000,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12050,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12050,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12050,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12050,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12100,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12100,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12100,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12100,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12150,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12150,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12150,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12150,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12200,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12200,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12200,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12200,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12250,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12250,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12250,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12250,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12300,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12300,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12300,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12300,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12350,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12350,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12350,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12350,
+    y: 320,
+    coin}),
+    new Coin({
+    x: 12400,
+    y: 470,
+    coin}),
+    new Coin({
+    x: 12400,
+    y: 420,
+    coin}),
+    new Coin({
+    x: 12400,
+    y: 370,
+    coin}),
+    new Coin({
+    x: 12400,
+    y: 320,
+    coin}),
 ]
 
 // Base platform placement
@@ -960,6 +1272,34 @@ const platforms = [new Platform({
     platform }),
     new Platform({ 
     x: 10500, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 11600, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 11860, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 12120, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 12850, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 13110, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 13370, 
+    y: 510, 
+    platform }),
+    new Platform({ 
+    x: 13630, 
     y: 510, 
     platform }),
 ]
@@ -1088,6 +1428,10 @@ const smallPlatforms = [new SmallPlatform({
     x: 11200,
     y: 510, 
     smallPlatform }),
+    new SmallPlatform({ 
+    x: 11400,
+    y: 510, 
+    smallPlatform }),
 ]
 
 //cloud placement
@@ -1207,6 +1551,11 @@ const clouds = [
     y: 450,
     cloud
     }),
+    new Cloud({
+    x: 12650,
+    y: 500,
+    cloud
+    }),
 ]
 
 // tree placments
@@ -1258,6 +1607,17 @@ const trees = [
     }),
 ]
 
+const treePurples = [
+    new TreePurple({
+    x: 13000,
+    y: 200,
+    treePurple}),
+    new TreePurple({
+    x: 13400,
+    y: 200,
+    treePurple}),
+]
+
 // wind mill placements
 const windMills = [
     new WindMill({
@@ -1297,6 +1657,11 @@ const windMills = [
     }),
     new WindMill({
     x: 8041,
+    y: 70,
+    wind
+    }),
+    new WindMill({
+    x: 9064,
     y: 70,
     wind
     }),
@@ -1354,6 +1719,11 @@ const genericObjects = [
     y: 0,
     background
     }),
+    new GenericObject({
+    x: 9207,
+    y: 0,
+    background
+    }),
 ]
 
 const keys = {
@@ -1366,6 +1736,7 @@ const keys = {
 }
 
 let scrollOffset = 0
+
 
 function animate() {
     requestAnimationFrame(animate)
@@ -1382,6 +1753,10 @@ function animate() {
 
     trees.forEach(trees =>{
         trees.draw()
+    })
+
+    treePurples.forEach(treePurples =>{
+        treePurples.draw()
     })
 
     clouds.forEach(cloud =>{
@@ -1407,14 +1782,18 @@ function animate() {
     catNips.forEach((catNip) => {
         catNip.draw() 
     })
-
+  
     player.update()
+
+  boxs.forEach((box) => {
+        box.draw() 
+    })
 
     // Player movement & side scroll 
     if (keys.right.pressed && player.position.x < 500) {
         player.velocity.x = playerSpeed
     }
-    else if ((keys.left.pressed && player.position.x > 300) || (keys.left.pressed && scrollOffset === -0 && player.position.x > 0)) {
+    else if ((keys.left.pressed && player.position.x > -0) || (keys.left.pressed && scrollOffset === -0 && player.position.x > 0)) {
         player.velocity.x = -playerSpeed
     } 
     else {
@@ -1436,6 +1815,9 @@ function animate() {
             trees.forEach((tree) => {
                 tree.position.x -= playerSpeed
             })
+            treePurples.forEach((treePurple) => {
+                treePurple.position.x -= playerSpeed
+            })
             genericObjects.forEach(genericObjects => {
                 genericObjects.position.x -= playerSpeed * .66
             })
@@ -1448,38 +1830,49 @@ function animate() {
             catNips.forEach(catNips => {
                 catNips.position.x -= playerSpeed
             })
-        }
-        else if (keys.left.pressed && scrollOffset > 0) {
-            scrollOffset -= 5
-            platforms.forEach((platform) => {
-                platform.position.x += playerSpeed
-            })
-            mediumPlatforms.forEach((mediumPlatform) => {
-                mediumPlatform.position.x += playerSpeed
-            })
-            smallPlatforms.forEach((smallPlatform) => {
-                smallPlatform.position.x += playerSpeed
-            })
-            clouds.forEach((cloud) => {
-                cloud.position.x += playerSpeed
-            })
-            trees.forEach((trees) => {
-                trees.position.x += playerSpeed
-            })
-            genericObjects.forEach(genericObjects => {
-                genericObjects.position.x += playerSpeed * .66
-            })
-            windMills.forEach(windMills => {
-                windMills.position.x += playerSpeed * .66
-            })
-            coins.forEach(coins => {
-                coins.position.x += playerSpeed
-            })
-            catNips.forEach(catNips => {
-                catNips.position.x += playerSpeed
+            boxs.forEach(boxs => {
+                boxs.position.x -= playerSpeed
             })
         }
+        //HAD TO COMMENT OUT BECAUSE IF WAS ALTERING MY WIN POSITION
+    //     else if (keys.left.pressed && scrollOffset > 0) {
+    //         scrollOffset -= 5
+    //         platforms.forEach((platform) => {
+    //             platform.position.x += playerSpeed
+    //         })
+    //         mediumPlatforms.forEach((mediumPlatform) => {
+    //             mediumPlatform.position.x += playerSpeed
+    //         })
+    //         smallPlatforms.forEach((smallPlatform) => {
+    //             smallPlatform.position.x += playerSpeed
+    //         })
+    //         clouds.forEach((cloud) => {
+    //             cloud.position.x += playerSpeed
+    //         })
+    //         trees.forEach((trees) => {
+    //             trees.position.x += playerSpeed
+    //         })
+    //         treePurples.forEach((treePurple) => {
+    //             treePurple.position.x += playerSpeed
+    //         })
+    //         genericObjects.forEach(genericObjects => {
+    //             genericObjects.position.x += playerSpeed * .66
+    //         })
+    //         windMills.forEach(windMills => {
+    //             windMills.position.x += playerSpeed * .66
+    //         })
+    //         coins.forEach(coins => {
+    //             coins.position.x += playerSpeed
+    //         })
+    //         catNips.forEach(catNips => {
+    //             catNips.position.x += playerSpeed
+    //         })
+    //         boxs.forEach(boxs => {
+    //             boxs.position.x += playerSpeed
+    //         })
+    //     }
     }
+
     // Coin vanishing
     coins.forEach((coin) => {
         if ( 
@@ -1490,8 +1883,6 @@ function animate() {
 
         }
     })
-
-
 
     //Cat Nip Vanishing
     catNips.forEach((catNip) => {
@@ -1538,15 +1929,23 @@ function animate() {
     })
 
     // Win condition
-    if (scrollOffset > 20000) {
-        console.log('You Win')
+    if (scrollOffset === 12820) {
+        playerSpeed = 0
+        win()
     }
-
+    let newPosition = {
+        x: 100,
+        y: 100
+    }
     // Lose condition
     if (player.position.y > canvas.height) {
-        console.log('You Lose')
+        player.position = newPosition
+       lifeCounter()
     }
 
+    if (lifeCounts === 0) {
+        lose()
+    }
 }
 
 animate()
@@ -1557,16 +1956,17 @@ window.addEventListener('keydown', ({keyCode}) => {
         case 65:
             console.log('left')
             keys.left.pressed = true
+            player.image = catStandLeft
             break
         case 68:
             console.log('right')
             keys.right.pressed = true
+            player.image = catStandRight
             break
         case 87:
             console.log('up')
             document.getElementById('jump').play()
             player.velocity.y = -20
-            // keyDownVelocity 
             break
         case 83:
             console.log('down')
@@ -1579,10 +1979,12 @@ window.addEventListener('keyup', ({keyCode}) => {
         case 65:
             console.log('left')
             keys.left.pressed = false
+            player.image = catSitLeft
             break
         case 68:
             console.log('right')
             keys.right.pressed = false
+            player.image = catSitRight
             break
         case 87:
             console.log('up')
